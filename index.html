@@ -41,10 +41,9 @@
             display: flex; align-items: center; justify-content: space-between;
         }
         .nav-logo {
-            font-size: 1.5rem; font-weight: 900; color: var(--navy);
-            text-decoration: none; letter-spacing: -0.5px;
+            display: flex; align-items: center; text-decoration: none;
         }
-        .nav-logo span { color: var(--blue); }
+        .nav-logo img { height: 45px; width: auto; }
         .nav-links { display: flex; gap: 1.5rem; align-items: center; }
         .nav-links a {
             text-decoration: none; color: var(--gray); font-size: 0.875rem;
@@ -184,6 +183,11 @@
             transition: all 0.3s;
         }
         .step:hover { box-shadow: 0 12px 40px rgba(21,101,192,0.12); transform: translateY(-4px); }
+        .step-img {
+            width: 100%; height: 200px; object-fit: contain;
+            margin-bottom: 1.25rem; border-radius: 8px;
+            background: var(--bg-light); padding: 1rem;
+        }
         .step-number {
             width: 40px; height: 40px; border-radius: 50%;
             background: var(--blue); color: var(--white);
@@ -201,31 +205,26 @@
 
         /* COMPETITIVE */
         .competitive { background: var(--bg-light); }
-        .comp-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 3rem; align-items: start; }
-        table {
-            width: 100%; border-collapse: separate; border-spacing: 0;
-            background: var(--white); border-radius: 12px; overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        .advantages-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .advantage-card {
+            background: var(--white); border-radius: 16px; padding: 2.5rem;
+            text-align: center; border: 1px solid #e2e8f0;
+            transition: all 0.3s;
         }
-        th {
-            background: var(--navy); color: var(--white); padding: 1rem;
-            font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;
-            font-weight: 700;
+        .advantage-card:hover { box-shadow: 0 12px 40px rgba(21,101,192,0.12); transform: translateY(-4px); }
+        .advantage-value {
+            font-size: 3.5rem; font-weight: 900; color: var(--blue);
+            line-height: 1; margin-bottom: 0.5rem;
         }
-        td {
-            padding: 0.85rem 1rem; border-bottom: 1px solid #f1f5f9;
-            font-size: 0.9rem; text-align: center;
+        .advantage-label {
+            font-size: 1.1rem; font-weight: 700; color: var(--navy); margin-bottom: 0.75rem;
         }
-        tr:first-child td {
-            background: rgba(0,176,255,0.06); font-weight: 600; color: var(--blue);
+        .advantage-card p { color: var(--gray); font-size: 0.95rem; line-height: 1.6; }
+        .advantage-badge {
+            display: inline-block; background: rgba(0,176,255,0.1);
+            color: var(--blue); font-weight: 600; font-size: 0.8rem;
+            padding: 0.3rem 0.75rem; border-radius: 50px; margin-top: 1rem;
         }
-        .comp-highlights { display: flex; flex-direction: column; gap: 1.5rem; }
-        .comp-highlight {
-            background: var(--white); border-radius: 12px; padding: 1.5rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
-        }
-        .comp-highlight h3 { font-size: 2rem; font-weight: 900; color: var(--blue); }
-        .comp-highlight p { color: var(--gray); font-size: 0.9rem; margin-top: 0.25rem; }
 
         /* BUSINESS MODEL */
         .models { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
@@ -360,7 +359,7 @@
             .story-content { grid-template-columns: 1fr; gap: 2rem; }
             .stat-cards { grid-template-columns: 1fr; }
             .solution-steps { grid-template-columns: 1fr; }
-            .comp-grid { grid-template-columns: 1fr; }
+            .advantages-grid { grid-template-columns: 1fr; }
             .models { grid-template-columns: 1fr; }
             .network-stats { grid-template-columns: 1fr; }
             .roadmap-timeline { flex-direction: column; gap: 2rem; }
@@ -368,8 +367,6 @@
             .awards-grid { grid-template-columns: 1fr; }
             .countries { grid-template-columns: 1fr; }
             .footer-content { grid-template-columns: 1fr; gap: 2rem; }
-            table { font-size: 0.8rem; }
-            th, td { padding: 0.6rem 0.5rem; }
         }
     </style>
 </head>
@@ -377,7 +374,7 @@
 
 <!-- NAV -->
 <nav>
-    <a href="#" class="nav-logo">ASK<span>CARE</span></a>
+    <a href="#" class="nav-logo"><img src="images/logo_doc_0.jpg" alt="ASKcare - Démocratisons les soins de santé"></a>
     <div class="nav-links" id="navLinks">
         <a href="#story">Notre histoire</a>
         <a href="#problem">Le problème</a>
@@ -500,18 +497,21 @@
         <p class="section-subtitle">Tout en une seule visite. Test, Triage, Traitement.</p>
         <div class="solution-steps">
             <div class="step">
+                <img src="images/solution3t_0.png" alt="Test de diagnostic rapide HPV" class="step-img">
                 <div class="step-number">01</div>
                 <h3>Test de Diagnostic Rapide</h3>
                 <p>Un test de diagnostic rapide approuvé par la FDA. Résultats en seulement 10 minutes.</p>
                 <div class="price">10 USD par test</div>
             </div>
             <div class="step">
+                <img src="images/solution3t_1.png" alt="Colposcope numérique assisté par IA" class="step-img">
                 <div class="step-number">02</div>
                 <h3>Colposcope numérique</h3>
                 <p>Un colposcope numérique assisté par IA pour l'évaluation des risques (Triage).</p>
                 <div class="price">Assisté par Intelligence Artificielle</div>
             </div>
             <div class="step">
+                <img src="images/solution3t_2.png" alt="Thermocoagulateur" class="step-img">
                 <div class="step-number">03</div>
                 <h3>Thermocoagulateur</h3>
                 <p>Un thermocoagulateur pour l'élimination le jour même des lésions précancéreuses (Traitement).</p>
@@ -524,47 +524,29 @@
     </div>
 </section>
 
-<!-- AVANTAGE CONCURRENTIEL -->
+<!-- NOS AVANTAGES -->
 <section class="competitive" id="competitive">
     <div class="container">
-        <div class="section-title">Avantage concurrentiel</div>
-        <p class="section-subtitle">Plus rapide, plus abordable, certifié FDA.</p>
-        <div class="comp-grid">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Concurrent</th>
-                        <th>Durée du test</th>
-                        <th>Prix</th>
-                        <th>Certification FDA</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>ASK CARE</strong></td>
-                        <td><strong>10 min</strong></td>
-                        <td><strong>10 $</strong></td>
-                        <td>&#10003;</td>
-                    </tr>
-                    <tr><td>Roche</td><td>2 semaines</td><td>35 $</td><td>&#10003;</td></tr>
-                    <tr><td>Abbott</td><td>2 semaines</td><td>35 $</td><td>&#10003;</td></tr>
-                    <tr><td>BioMérieux</td><td>2 semaines</td><td>35 $</td><td>&#10003;</td></tr>
-                    <tr><td>Bio-Rad</td><td>2 semaines</td><td>35 $</td><td>&#10003;</td></tr>
-                </tbody>
-            </table>
-            <div class="comp-highlights">
-                <div class="comp-highlight">
-                    <h3>10 $</h3>
-                    <p>Prix du test de diagnostic. Les concurrents varient entre 35 et 70 USD.</p>
-                </div>
-                <div class="comp-highlight">
-                    <h3>10 min</h3>
-                    <p>Résultats en 10 minutes. Les concurrents : minimum 2 semaines.</p>
-                </div>
-                <div class="comp-highlight">
-                    <h3>1 visite</h3>
-                    <p>Dépistage et traitement complets. Les concurrents : minimum 3 semaines.</p>
-                </div>
+        <div class="section-title">Nos avantages</div>
+        <p class="section-subtitle">Une solution rapide, abordable et certifiée FDA.</p>
+        <div class="advantages-grid">
+            <div class="advantage-card">
+                <div class="advantage-value">10$</div>
+                <div class="advantage-label">Par test de diagnostic</div>
+                <p>Un prix accessible pour un test de diagnostic rapide certifié FDA, rendant le dépistage abordable pour tous les établissements de santé.</p>
+                <div class="advantage-badge">Certifié FDA</div>
+            </div>
+            <div class="advantage-card">
+                <div class="advantage-value">10 min</div>
+                <div class="advantage-label">Résultats rapides</div>
+                <p>Obtenez les résultats du test en seulement 10 minutes, permettant une prise en charge immédiate et un traitement le jour même.</p>
+                <div class="advantage-badge">Résultats immédiats</div>
+            </div>
+            <div class="advantage-card">
+                <div class="advantage-value">1</div>
+                <div class="advantage-label">Seule visite nécessaire</div>
+                <p>Notre solution complète permet le dépistage et le traitement des lésions précancéreuses du col de l'utérus en une seule visite.</p>
+                <div class="advantage-badge">Solution tout-en-un</div>
             </div>
         </div>
     </div>
@@ -759,7 +741,7 @@
 <footer id="contact">
     <div class="footer-content">
         <div class="footer-brand">
-            <div style="font-size:1.5rem;font-weight:900">ASK<span style="color:var(--cyan)">CARE</span></div>
+            <img src="images/logo_doc_0.jpg" alt="ASKcare" style="height:50px;width:auto;filter:brightness(0) invert(1)">
             <p>Démocratisons les soins de santé. Rendre les soins de santé accessibles à tous.</p>
             <p style="margin-top:1rem;opacity:0.8">Siège : Mbour, Sénégal</p>
         </div>
