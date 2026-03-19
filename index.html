@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASKcare FemTech — Démocratisons les soins de santé</title>
+    <meta name="description" content="ASKcare rend les soins de santé accessibles à tous. Solution 3T pour la prévention du cancer du col de l'utérus en Afrique.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --navy: #0a1a3f;
+            --blue: #1565c0;
+            --blue-light: #1e88e5;
+            --cyan: #00b0ff;
+            --bg-light: #f5f8fc;
+            --white: #ffffff;
+            --gray: #64748b;
+            --text: #1e293b;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background: var(--white);
+        }
+
+        /* NAV */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e2e8f0;
+            padding: 0.75rem 2rem;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .nav-logo {
+            font-size: 1.5rem; font-weight: 900; color: var(--navy);
+            text-decoration: none; letter-spacing: -0.5px;
+        }
+        .nav-logo span { color: var(--blue); }
+        .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+        .nav-links a {
+            text-decoration: none; color: var(--gray); font-size: 0.875rem;
+            font-weight: 500; transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--blue); }
+        .nav-cta {
+            background: var(--blue) !important; color: var(--white) !important;
+            padding: 0.5rem 1.25rem; border-radius: 8px;
+            font-weight: 600 !important; transition: background 0.2s;
+        }
+        .nav-cta:hover { background: var(--navy) !important; }
+        .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; }
+        .hamburger svg { width: 24px; height: 24px; stroke: var(--navy); }
+
+        /* SECTIONS */
+        section { padding: 5rem 2rem; }
+        .container { max-width: 1100px; margin: 0 auto; }
+        .section-title {
+            font-size: 2.25rem; font-weight: 800; color: var(--navy);
+            margin-bottom: 0.75rem; line-height: 1.2;
+        }
+        .section-subtitle {
+            font-size: 1.1rem; color: var(--gray); margin-bottom: 3rem;
+            max-width: 600px;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh; display: flex; align-items: center;
+            background: linear-gradient(135deg, var(--navy) 0%, #0d2b6b 50%, var(--blue) 100%);
+            color: var(--white); padding-top: 5rem;
+            position: relative; overflow: hidden;
+        }
+        .hero::after {
+            content: ''; position: absolute; top: -50%; right: -20%;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(0,176,255,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero .container { position: relative; z-index: 1; }
+        .hero-badge {
+            display: inline-block; background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 0.4rem 1rem; border-radius: 50px;
+            font-size: 0.8rem; font-weight: 600; margin-bottom: 1.5rem;
+            letter-spacing: 1px; text-transform: uppercase;
+        }
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900;
+            line-height: 1.1; margin-bottom: 1rem;
+        }
+        .hero h1 span { color: var(--cyan); }
+        .hero p {
+            font-size: 1.2rem; opacity: 0.85; max-width: 550px;
+            margin-bottom: 2rem; line-height: 1.7;
+        }
+        .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .btn {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            padding: 0.85rem 2rem; border-radius: 10px;
+            font-size: 1rem; font-weight: 600; text-decoration: none;
+            transition: all 0.3s;
+        }
+        .btn-primary { background: var(--cyan); color: var(--navy); }
+        .btn-primary:hover { background: #40c4ff; transform: translateY(-2px); }
+        .btn-outline {
+            background: transparent; color: var(--white);
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        .btn-outline:hover { border-color: var(--white); }
+        .hero-stats {
+            display: flex; gap: 3rem; margin-top: 3.5rem;
+            padding-top: 2.5rem; border-top: 1px solid rgba(255,255,255,0.15);
+        }
+        .hero-stat h3 { font-size: 2rem; font-weight: 800; color: var(--cyan); }
+        .hero-stat p { font-size: 0.85rem; opacity: 0.7; margin-top: 0.25rem; }
+
+        /* STORY */
+        .story { background: var(--bg-light); }
+        .story-content { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .story-text p { color: var(--gray); margin-bottom: 1rem; }
+        .story-text blockquote {
+            border-left: 4px solid var(--cyan); padding-left: 1.25rem;
+            font-style: italic; color: var(--navy); font-weight: 500;
+            margin: 1.5rem 0;
+        }
+        .timeline {
+            display: flex; gap: 0; position: relative;
+        }
+        .timeline::before {
+            content: ''; position: absolute; top: 50%; left: 0; right: 0;
+            height: 3px; background: #e2e8f0;
+        }
+        .timeline-item {
+            flex: 1; text-align: center; position: relative; padding-top: 2rem;
+        }
+        .timeline-dot {
+            width: 16px; height: 16px; border-radius: 50%;
+            background: var(--blue); border: 3px solid var(--white);
+            position: absolute; top: calc(50% - 8px); left: 50%;
+            transform: translateX(-50%); z-index: 1;
+            box-shadow: 0 0 0 4px var(--bg-light);
+        }
+        .timeline-year { font-weight: 800; color: var(--navy); font-size: 1.1rem; }
+        .timeline-bar {
+            width: 60px; margin: 0.5rem auto; border-radius: 4px;
+            background: var(--blue);
+        }
+
+        /* PROBLEM */
+        .problem { background: var(--navy); color: var(--white); }
+        .problem .section-title { color: var(--white); }
+        .problem .section-subtitle { color: rgba(255,255,255,0.6); }
+        .stat-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .stat-card {
+            background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px; padding: 2rem; text-align: center;
+            transition: transform 0.3s;
+        }
+        .stat-card:hover { transform: translateY(-4px); }
+        .stat-icon {
+            width: 56px; height: 56px; margin: 0 auto 1rem;
+            background: rgba(0,176,255,0.15); border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .stat-icon svg { width: 28px; height: 28px; fill: var(--cyan); }
+        .stat-card h3 { font-size: 2.5rem; font-weight: 900; color: var(--cyan); margin-bottom: 0.5rem; }
+        .stat-card p { font-size: 0.95rem; opacity: 0.8; line-height: 1.5; }
+        .stat-card .source { font-size: 0.75rem; opacity: 0.4; margin-top: 0.75rem; }
+
+        /* SOLUTION */
+        .solution-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 2rem; }
+        .step {
+            background: var(--white); border: 1px solid #e2e8f0;
+            border-radius: 16px; padding: 2rem; position: relative;
+            transition: all 0.3s;
+        }
+        .step:hover { box-shadow: 0 12px 40px rgba(21,101,192,0.12); transform: translateY(-4px); }
+        .step-number {
+            width: 40px; height: 40px; border-radius: 50%;
+            background: var(--blue); color: var(--white);
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 1.1rem; margin-bottom: 1rem;
+        }
+        .step h3 { font-size: 1.2rem; font-weight: 700; color: var(--navy); margin-bottom: 0.5rem; }
+        .step p { color: var(--gray); font-size: 0.95rem; }
+        .step .price { color: var(--blue); font-weight: 700; margin-top: 0.75rem; font-size: 0.9rem; }
+        .solution-banner {
+            margin-top: 2.5rem; background: linear-gradient(135deg, var(--blue), var(--navy));
+            color: var(--white); padding: 1.5rem 2rem; border-radius: 12px;
+            text-align: center; font-size: 1.1rem; font-weight: 600;
+        }
+
+        /* COMPETITIVE */
+        .competitive { background: var(--bg-light); }
+        .comp-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 3rem; align-items: start; }
+        table {
+            width: 100%; border-collapse: separate; border-spacing: 0;
+            background: var(--white); border-radius: 12px; overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+        th {
+            background: var(--navy); color: var(--white); padding: 1rem;
+            font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;
+            font-weight: 700;
+        }
+        td {
+            padding: 0.85rem 1rem; border-bottom: 1px solid #f1f5f9;
+            font-size: 0.9rem; text-align: center;
+        }
+        tr:first-child td {
+            background: rgba(0,176,255,0.06); font-weight: 600; color: var(--blue);
+        }
+        .comp-highlights { display: flex; flex-direction: column; gap: 1.5rem; }
+        .comp-highlight {
+            background: var(--white); border-radius: 12px; padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+        }
+        .comp-highlight h3 { font-size: 2rem; font-weight: 900; color: var(--blue); }
+        .comp-highlight p { color: var(--gray); font-size: 0.9rem; margin-top: 0.25rem; }
+
+        /* BUSINESS MODEL */
+        .models { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
+        .model-card {
+            background: var(--white); border-radius: 16px; padding: 2rem;
+            border: 1px solid #e2e8f0; transition: all 0.3s;
+        }
+        .model-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+        .model-card h3 {
+            font-size: 1rem; font-weight: 700; color: var(--white);
+            background: var(--navy); padding: 0.6rem 1rem; border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        .model-card p { color: var(--gray); font-size: 0.9rem; line-height: 1.6; }
+
+        /* NETWORK */
+        .network { background: var(--navy); color: var(--white); }
+        .network .section-title { color: var(--white); }
+        .network .section-subtitle { color: rgba(255,255,255,0.6); }
+        .network-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-bottom: 2rem; }
+        .network-stat {
+            text-align: center; background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px; padding: 2rem;
+        }
+        .network-stat h3 { font-size: 3rem; font-weight: 900; color: var(--cyan); }
+        .network-stat p { font-size: 0.9rem; opacity: 0.7; margin-top: 0.5rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; font-size: 0.8rem; }
+        .network-partner {
+            text-align: center; padding: 1.5rem; background: rgba(255,255,255,0.04);
+            border-radius: 12px; font-size: 0.95rem; opacity: 0.8;
+        }
+
+        /* ROADMAP */
+        .roadmap-timeline {
+            display: flex; justify-content: space-between; position: relative;
+            margin-top: 3rem; padding: 0 2rem;
+        }
+        .roadmap-timeline::before {
+            content: ''; position: absolute; top: 40px; left: 10%; right: 10%;
+            height: 4px; background: linear-gradient(90deg, var(--cyan), var(--blue), var(--navy));
+            border-radius: 2px;
+        }
+        .roadmap-item { text-align: center; position: relative; flex: 1; }
+        .roadmap-circle {
+            width: 80px; height: 80px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 0.85rem; color: var(--white);
+            margin: 0 auto 1.25rem; position: relative; z-index: 1;
+        }
+        .roadmap-item:nth-child(1) .roadmap-circle { background: var(--cyan); }
+        .roadmap-item:nth-child(2) .roadmap-circle { background: var(--blue); }
+        .roadmap-item:nth-child(3) .roadmap-circle { background: var(--navy); border: 2px solid var(--blue); }
+        .roadmap-item h4 { font-size: 0.9rem; font-weight: 700; color: var(--navy); margin-bottom: 0.5rem; }
+        .roadmap-item p { font-size: 0.85rem; color: var(--gray); max-width: 250px; margin: 0 auto; }
+        .countries {
+            margin-top: 3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+            background: var(--bg-light); border-radius: 16px; padding: 2rem;
+        }
+        .countries h4 { font-weight: 700; color: var(--blue); margin-bottom: 0.75rem; }
+        .countries ul { list-style: none; }
+        .countries li {
+            padding: 0.3rem 0; color: var(--gray); font-size: 0.9rem;
+        }
+        .countries li::before { content: '→ '; color: var(--cyan); font-weight: 700; }
+
+        /* AWARDS */
+        .awards { background: var(--bg-light); }
+        .awards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+        .award-card {
+            background: var(--white); border-radius: 12px; padding: 1.5rem;
+            border: 1px solid #e2e8f0; transition: all 0.3s;
+        }
+        .award-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.06); }
+        .award-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+        .award-card h4 { font-size: 0.95rem; font-weight: 700; color: var(--navy); margin-bottom: 0.4rem; }
+        .award-card p { font-size: 0.8rem; color: var(--gray); line-height: 1.5; }
+
+        /* CARE APP */
+        .care-app {
+            background: linear-gradient(135deg, var(--blue), var(--navy));
+            color: var(--white); text-align: center;
+        }
+        .care-app .section-title { color: var(--white); }
+        .care-app p { opacity: 0.85; max-width: 650px; margin: 0 auto 2rem; font-size: 1.05rem; }
+        .care-badge {
+            display: inline-block; background: rgba(0,176,255,0.2);
+            border: 1px solid rgba(0,176,255,0.4);
+            padding: 0.5rem 1.5rem; border-radius: 50px;
+            font-weight: 600; font-size: 0.9rem; color: var(--cyan);
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--navy); color: var(--white); padding: 3rem 2rem;
+        }
+        .footer-content {
+            max-width: 1100px; margin: 0 auto;
+            display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem;
+        }
+        .footer-brand p { opacity: 0.6; font-size: 0.9rem; margin-top: 0.75rem; line-height: 1.6; }
+        .footer-col h4 {
+            font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;
+            opacity: 0.5; margin-bottom: 1rem;
+        }
+        .footer-col a {
+            display: block; color: rgba(255,255,255,0.8); text-decoration: none;
+            font-size: 0.9rem; padding: 0.3rem 0; transition: color 0.2s;
+        }
+        .footer-col a:hover { color: var(--cyan); }
+        .footer-bottom {
+            max-width: 1100px; margin: 2rem auto 0;
+            padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center; font-size: 0.8rem; opacity: 0.4;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            nav { padding: 0.75rem 1rem; }
+            .nav-links { display: none; }
+            .nav-links.active {
+                display: flex; flex-direction: column;
+                position: absolute; top: 100%; left: 0; right: 0;
+                background: var(--white); padding: 1rem; gap: 0.75rem;
+                border-bottom: 1px solid #e2e8f0;
+            }
+            .hamburger { display: block; }
+            section { padding: 3rem 1.25rem; }
+            .section-title { font-size: 1.75rem; }
+            .hero { padding-top: 4rem; }
+            .hero h1 { font-size: 2rem; }
+            .hero-stats { flex-direction: column; gap: 1.5rem; }
+            .story-content { grid-template-columns: 1fr; gap: 2rem; }
+            .stat-cards { grid-template-columns: 1fr; }
+            .solution-steps { grid-template-columns: 1fr; }
+            .comp-grid { grid-template-columns: 1fr; }
+            .models { grid-template-columns: 1fr; }
+            .network-stats { grid-template-columns: 1fr; }
+            .roadmap-timeline { flex-direction: column; gap: 2rem; }
+            .roadmap-timeline::before { display: none; }
+            .awards-grid { grid-template-columns: 1fr; }
+            .countries { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr; gap: 2rem; }
+            table { font-size: 0.8rem; }
+            th, td { padding: 0.6rem 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <a href="#" class="nav-logo">ASK<span>CARE</span></a>
+    <div class="nav-links" id="navLinks">
+        <a href="#story">Notre histoire</a>
+        <a href="#problem">Le problème</a>
+        <a href="#solution">Solutions</a>
+        <a href="#competitive">Avantages</a>
+        <a href="#network">Réseau</a>
+        <a href="#roadmap">Feuille de route</a>
+        <a href="#contact" class="nav-cta">Contact</a>
+    </div>
+    <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('active')" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round">
+            <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+    </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-badge">FemTech &bull; Santé en Afrique</div>
+        <h1>Démocratisons<br>les <span>soins de santé</span></h1>
+        <p>Rendre les soins de santé accessibles à tous. ASKcare fournit des solutions de diagnostic abordables et innovantes pour la prévention du cancer du col de l'utérus en Afrique.</p>
+        <div class="hero-buttons">
+            <a href="#contact" class="btn btn-primary">Nous contacter</a>
+            <a href="#solution" class="btn btn-outline">Découvrir nos solutions</a>
+        </div>
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <h3>300K+</h3>
+                <p>Tests d'échographie rendus possibles</p>
+            </div>
+            <div class="hero-stat">
+                <h3>80+</h3>
+                <p>Postes de santé partenaires</p>
+            </div>
+            <div class="hero-stat">
+                <h3>10$</h3>
+                <p>Par test de diagnostic rapide</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- NOTRE HISTOIRE -->
+<section class="story" id="story">
+    <div class="container">
+        <div class="story-content">
+            <div class="story-text">
+                <div class="section-title">Comment ça a commencé</div>
+                <p class="section-subtitle">Guidés par la compassion, nous avons donné les moyens d'agir aux cliniques locales.</p>
+                <blockquote>Aucune autre famille ne devrait subir le même sort.</blockquote>
+                <p>Après avoir perdu son bébé à cause d'un équipement médical défectueux, notre fondatrice, <strong>Aissatou Diallo</strong>, a fait le serment qu'aucune autre famille ne devrait subir le même sort.</p>
+                <p>Elle a trouvé deux appareils d'échographie portables de haute qualité et les a fournis à une clinique à Mbour. Grâce à un plan de paiement flexible, la clinique a remboursé l'équipement et en a pris pleine possession.</p>
+                <p>Forts de cette preuve de concept, nous avons déployé des appareils supplémentaires en privilégiant la flexibilité, l'abordabilité et la fiabilité, élargissant l'accès des femmes à des services de qualité.</p>
+            </div>
+            <div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-year">2019</div>
+                        <div class="timeline-bar" style="height:40px;background:var(--blue)"></div>
+                        <div style="font-size:0.8rem;color:var(--gray);margin-top:0.5rem">Premiers appareils</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-year">2021</div>
+                        <div class="timeline-bar" style="height:80px;background:var(--blue)"></div>
+                        <div style="font-size:0.8rem;color:var(--gray);margin-top:0.5rem">Expansion du modèle</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-year">2023</div>
+                        <div class="timeline-bar" style="height:120px;background:var(--navy)"></div>
+                        <div style="font-size:0.8rem;color:var(--gray);margin-top:0.5rem">300K+ tests</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PROBLEME -->
+<section class="problem" id="problem">
+    <div class="container">
+        <div class="section-title">Le cancer du col de l'utérus</div>
+        <p class="section-subtitle">Un domaine qui nécessite une action immédiate.</p>
+        <div class="stat-cards">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                </div>
+                <h3>80%</h3>
+                <p>L'Afrique et l'Asie contribuent à près de 80% des nouveaux cas et des décès dans le monde.</p>
+                <div class="source">OMS 2022</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                </div>
+                <h3>19/20</h3>
+                <p>19 des 20 pays ayant les taux les plus élevés se situent en Afrique.</p>
+                <div class="source">OMS 2022</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2l-5.5 9h11L12 2zm0 3.84L13.93 9h-3.87L12 5.84zM17.5 13c-2.49 0-4.5 2.01-4.5 4.5s2.01 4.5 4.5 4.5 4.5-2.01 4.5-4.5-2.01-4.5-4.5-4.5zm0 7c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5zM3 21.5h8v-8H3v8zm2-6h4v4H5v-4z"/></svg>
+                </div>
+                <h3>#1</h3>
+                <p>Le cancer du col de l'utérus est le type de cancer le plus fréquent au Sénégal.</p>
+                <div class="source">Statistiques sanitaires mondiales 2022</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SOLUTION 3T -->
+<section class="solution" id="solution">
+    <div class="container">
+        <div class="section-title">Solution 3T</div>
+        <p class="section-subtitle">Tout en une seule visite. Test, Triage, Traitement.</p>
+        <div class="solution-steps">
+            <div class="step">
+                <div class="step-number">01</div>
+                <h3>Test de Diagnostic Rapide</h3>
+                <p>Un test de diagnostic rapide approuvé par la FDA. Résultats en seulement 10 minutes.</p>
+                <div class="price">10 USD par test</div>
+            </div>
+            <div class="step">
+                <div class="step-number">02</div>
+                <h3>Colposcope numérique</h3>
+                <p>Un colposcope numérique assisté par IA pour l'évaluation des risques (Triage).</p>
+                <div class="price">Assisté par Intelligence Artificielle</div>
+            </div>
+            <div class="step">
+                <div class="step-number">03</div>
+                <h3>Thermocoagulateur</h3>
+                <p>Un thermocoagulateur pour l'élimination le jour même des lésions précancéreuses (Traitement).</p>
+                <div class="price">Traitement immédiat sur place</div>
+            </div>
+        </div>
+        <div class="solution-banner">
+            Colposcope + Thermocoagulateur : 10 000 USD — Solution complète en une seule visite
+        </div>
+    </div>
+</section>
+
+<!-- AVANTAGE CONCURRENTIEL -->
+<section class="competitive" id="competitive">
+    <div class="container">
+        <div class="section-title">Avantage concurrentiel</div>
+        <p class="section-subtitle">Plus rapide, plus abordable, certifié FDA.</p>
+        <div class="comp-grid">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Concurrent</th>
+                        <th>Durée du test</th>
+                        <th>Prix</th>
+                        <th>Certification FDA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>ASK CARE</strong></td>
+                        <td><strong>10 min</strong></td>
+                        <td><strong>10 $</strong></td>
+                        <td>&#10003;</td>
+                    </tr>
+                    <tr><td>Roche</td><td>2 semaines</td><td>35 $</td><td>&#10003;</td></tr>
+                    <tr><td>Abbott</td><td>2 semaines</td><td>35 $</td><td>&#10003;</td></tr>
+                    <tr><td>BioMérieux</td><td>2 semaines</td><td>35 $</td><td>&#10003;</td></tr>
+                    <tr><td>Bio-Rad</td><td>2 semaines</td><td>35 $</td><td>&#10003;</td></tr>
+                </tbody>
+            </table>
+            <div class="comp-highlights">
+                <div class="comp-highlight">
+                    <h3>10 $</h3>
+                    <p>Prix du test de diagnostic. Les concurrents varient entre 35 et 70 USD.</p>
+                </div>
+                <div class="comp-highlight">
+                    <h3>10 min</h3>
+                    <p>Résultats en 10 minutes. Les concurrents : minimum 2 semaines.</p>
+                </div>
+                <div class="comp-highlight">
+                    <h3>1 visite</h3>
+                    <p>Dépistage et traitement complets. Les concurrents : minimum 3 semaines.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- BUSINESS MODELE -->
+<section id="business">
+    <div class="container">
+        <div class="section-title">Business modèle</div>
+        <p class="section-subtitle">Une approche axée sur le client avec trois modèles adaptables.</p>
+        <div class="models">
+            <div class="model-card">
+                <h3>Modèle CareCore</h3>
+                <p>Les revenus proviennent des tests de diagnostic rapide (10$ par test), des dispositifs médicaux POC (10 000$ pour un colposcope et un thermocoagulateur), ainsi que de la vente d'équipements médicaux.</p>
+            </div>
+            <div class="model-card">
+                <h3>Établissement de santé</h3>
+                <p>Paiements flexibles pour les équipements (modèle PAYG), ventes récurrentes de tests, et abonnements de maintenance destinés aux structures de santé à faible capital.</p>
+            </div>
+            <div class="model-card">
+                <h3>ONG & Secteur public</h3>
+                <p>Pour chaque achat de 50 000 tests, nous fournissons une clinique mobile équipée de colposcopes numériques, thermocoagulateurs et système de mammographie numérique.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- RESEAU -->
+<section class="network" id="network">
+    <div class="container">
+        <div class="section-title">Notre réseau</div>
+        <p class="section-subtitle">Facilitant notre présence dans les zones mal desservies.</p>
+        <div class="network-stats">
+            <div class="network-stat">
+                <h3>80</h3>
+                <p>Postes de santé</p>
+            </div>
+            <div class="network-stat">
+                <h3>76</h3>
+                <p>Postes de santé communautaire</p>
+            </div>
+            <div class="network-stat">
+                <h3>30</h3>
+                <p>Laboratoires</p>
+            </div>
+        </div>
+        <div class="network-partner">
+            Partenariat CARE avec l'Association Nationale des Postes de Santé Catholiques du Sénégal
+        </div>
+    </div>
+</section>
+
+<!-- FINANCES -->
+<section id="finances" style="background:var(--bg-light)">
+    <div class="container">
+        <div class="section-title">Finances</div>
+        <p class="section-subtitle">Une trajectoire de croissance solide.</p>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:2rem">
+            <div style="background:var(--white);border-radius:16px;padding:2rem;text-align:center;border:1px solid #e2e8f0">
+                <div style="font-size:2.5rem;font-weight:900;color:var(--blue)">226K USD</div>
+                <p style="color:var(--gray);font-size:0.9rem;margin-top:0.5rem">Revenus en 2024 avec seulement 5 clients</p>
+            </div>
+            <div style="background:var(--white);border-radius:16px;padding:2rem;text-align:center;border:1px solid #e2e8f0">
+                <div style="font-size:2.5rem;font-weight:900;color:var(--blue)">300K USD</div>
+                <p style="color:var(--gray);font-size:0.9rem;margin-top:0.5rem">Chiffre d'affaires en croissance</p>
+            </div>
+            <div style="background:var(--white);border-radius:16px;padding:2rem;text-align:center;border:1px solid #e2e8f0">
+                <div style="font-size:2.5rem;font-weight:900;color:var(--navy)">1M USD</div>
+                <p style="color:var(--gray);font-size:0.9rem;margin-top:0.5rem">Prévu dès la première année de distribution avec +80 partenaires</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FEUILLE DE ROUTE -->
+<section id="roadmap">
+    <div class="container">
+        <div class="section-title">Feuille de route</div>
+        <p class="section-subtitle">Atteindre 14 pays africains d'ici 2030.</p>
+        <div class="roadmap-timeline">
+            <div class="roadmap-item">
+                <div class="roadmap-circle">2025<br>2026</div>
+                <h4>Construction & Expansion</h4>
+                <p>Achèvement du centre ASKcare et expansion du réseau.</p>
+            </div>
+            <div class="roadmap-item">
+                <div class="roadmap-circle">2027</div>
+                <h4>Production de masse</h4>
+                <p>Développement industriel et production de masse.</p>
+            </div>
+            <div class="roadmap-item">
+                <div class="roadmap-circle">2030</div>
+                <h4>Bioparc & Innovation</h4>
+                <p>Hub d'innovation et présence dans 14 pays africains.</p>
+            </div>
+        </div>
+        <div class="countries">
+            <div>
+                <h4>D'ici 2027</h4>
+                <ul>
+                    <li>Sénégal</li>
+                    <li>Rwanda</li>
+                    <li>Mali</li>
+                    <li>Nigéria</li>
+                </ul>
+            </div>
+            <div>
+                <h4>D'ici 2030</h4>
+                <ul>
+                    <li>Côte d'Ivoire</li>
+                    <li>Guinée</li>
+                    <li>Bénin</li>
+                    <li>Togo</li>
+                    <li>Mauritanie</li>
+                    <li>Gambie</li>
+                    <li>Sierra Leone</li>
+                    <li>Niger</li>
+                    <li>Cameroun</li>
+                    <li>Burkina Faso</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- DISTINCTIONS -->
+<section class="awards" id="awards">
+    <div class="container">
+        <div class="section-title">Distinctions</div>
+        <p class="section-subtitle">Reconnus par les leaders de l'innovation en santé.</p>
+        <div class="awards-grid">
+            <div class="award-card">
+                <div class="award-icon">&#127942;</div>
+                <h4>Timbukto HealthTech StartUp</h4>
+                <p>Parmi les 15 startups les plus prometteuses en Afrique. Initiative du PNUD.</p>
+            </div>
+            <div class="award-card">
+                <div class="award-icon">&#127942;</div>
+                <h4>AFRITECH Innovator Awards 2024</h4>
+                <p>Lauréat pour la solution 3-en-1 de prévention du cancer du col de l'utérus.</p>
+            </div>
+            <div class="award-card">
+                <div class="award-icon">&#127942;</div>
+                <h4>SHEBA — ShEquity Business</h4>
+                <p>Classée 1re parmi les 30 entreprises africaines du programme d'accélération.</p>
+            </div>
+            <div class="award-card">
+                <div class="award-icon">&#127942;</div>
+                <h4>Forum Galien Afrique</h4>
+                <p>Lauréat du Young Innovator Awards.</p>
+            </div>
+            <div class="award-card">
+                <div class="award-icon">&#127942;</div>
+                <h4>Étoiles Montantes de Yokkute</h4>
+                <p>Programme d'accélération du consortium KPC et de KOICA.</p>
+            </div>
+            <div class="award-card">
+                <div class="award-icon">&#127942;</div>
+                <h4>WECCO — Enabel</h4>
+                <p>Programme d'entrepreneuriat médical porté par l'agence belge de développement.</p>
+            </div>
+            <div class="award-card">
+                <div class="award-icon">&#129309;</div>
+                <h4>Projet pilote Canal+</h4>
+                <p>Dépistage de 69 femmes. 26 cas positifs au HPV détectés, dont 2 lésions traitées sur place.</p>
+            </div>
+            <div class="award-card">
+                <div class="award-icon">&#127760;</div>
+                <h4>One Young World Academy</h4>
+                <p>Champions engagés pour l'équité en matière de santé mondiale.</p>
+            </div>
+            <div class="award-card">
+                <div class="award-icon">&#128241;</div>
+                <h4>Orange Corners</h4>
+                <p>Lancement de C.A.R.E, notre colposcopie digitale sur Android. 1 000 tests déployés.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- APP C.A.R.E -->
+<section class="care-app">
+    <div class="container">
+        <div class="section-title" style="margin-bottom:1.5rem">C.A.R.E</div>
+        <p style="font-size:1.3rem;font-weight:600;opacity:1;margin-bottom:0.5rem">Colposcopy, AI & Remote Evaluation</p>
+        <p>Notre colposcopie digitale sur Android. Grâce à Orange Corners, 1 000 tests seront déployés dans nos postes de santé partenaires. C.A.R.E, c'est la technologie au service de la prévention.</p>
+        <div class="care-badge">Disponible sur Android</div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+    <div class="footer-content">
+        <div class="footer-brand">
+            <div style="font-size:1.5rem;font-weight:900">ASK<span style="color:var(--cyan)">CARE</span></div>
+            <p>Démocratisons les soins de santé. Rendre les soins de santé accessibles à tous.</p>
+            <p style="margin-top:1rem;opacity:0.8">Siège : Mbour, Sénégal</p>
+        </div>
+        <div class="footer-col">
+            <h4>Contact</h4>
+            <a href="mailto:contact@askcare.co">contact@askcare.co</a>
+            <a href="tel:+221773384718">+221 77 338 47 18</a>
+        </div>
+        <div class="footer-col">
+            <h4>Navigation</h4>
+            <a href="#story">Notre histoire</a>
+            <a href="#problem">Le problème</a>
+            <a href="#solution">Solutions</a>
+            <a href="#competitive">Avantages</a>
+            <a href="#network">Réseau</a>
+            <a href="#roadmap">Feuille de route</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; 2025 ASKcare. Tous droits réservés. Mbour, Sénégal.
+    </div>
+</footer>
+
+</body>
+</html>
